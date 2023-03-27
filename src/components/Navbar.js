@@ -1,46 +1,49 @@
-import React from 'react'
-import styled from 'styled-components'
-import logo from '../assets/logo.svg'
-import { FaBars } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import { links } from '../utils/constants'
-import CartButtons from './CartButtons'
-import { useProductsContext } from '../context/products_context'
-import { useUserContext } from '../context/user_context'
+import React from "react";
+import { FaBars } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import logo from "../assets/logo.svg";
+import { useProductsContext } from "../context/products_context";
+import { useUserContext } from "../context/user_context";
+import { links } from "../utils/constants";
+import CartButtons from "./CartButtons";
 const Nav = () => {
-  const { openSidebar } = useProductsContext()
-  const { myUser } = useUserContext()
+  const { openSidebar } = useProductsContext();
+  const { myUser } = useUserContext();
   return (
     <NavContainer>
-      <div className='nav-center'>
-        <div className='nav-header'>
-          <Link to='/'>
-            <img src={logo} alt='comfy sloth' />
+      <div className="nav-center">
+        <div className="nav-header">
+          <Link to="/">
+            {/* <img src={logo} alt='comfy sloth' /> */}
+            <h2 style={{ color: "#102a42", fontWeight: 900 }}>
+              La<span style={{ color: "#453227" }}>zamo</span>
+            </h2>
           </Link>
-          <button type='button' className='nav-toggle' onClick={openSidebar}>
+          <button type="button" className="nav-toggle" onClick={openSidebar}>
             <FaBars />
           </button>
         </div>
-        <ul className='nav-links'>
+        <ul className="nav-links">
           {links.map((link) => {
-            const { id, text, url } = link
+            const { id, text, url } = link;
             return (
               <li key={id}>
                 <Link to={url}>{text}</Link>
               </li>
-            )
+            );
           })}
           {myUser && (
             <li>
-              <Link to='/checkout'>checkout</Link>
+              <Link to="/checkout">checkout</Link>
             </li>
           )}
         </ul>
         <CartButtons />
       </div>
     </NavContainer>
-  )
-}
+  );
+};
 
 const NavContainer = styled.nav`
   height: 5rem;
@@ -107,6 +110,6 @@ const NavContainer = styled.nav`
       display: grid;
     }
   }
-`
+`;
 
-export default Nav
+export default Nav;
